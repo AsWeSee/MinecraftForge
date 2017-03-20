@@ -355,7 +355,7 @@ String getVersionFromJava(File file)
     if (!System.getenv().containsKey("GIT_BRANCH"))
     {
         // TODO: use grgit - Tried to switch 07/07/16 - jgit broken on windows?
-        branch = "git rev-parse --abbrev-ref HEAD".execute().text.trim()
+        branch = "master" //"git rev-parse --abbrev-ref HEAD".execute().text.trim()
     }
     else
     {
