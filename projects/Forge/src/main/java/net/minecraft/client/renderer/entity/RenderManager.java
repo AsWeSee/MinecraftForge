@@ -163,7 +163,7 @@ public class RenderManager
         this.entityRenderMap.put(EntityStray.class, new RenderStray(this));
         this.entityRenderMap.put(EntityWitch.class, new RenderWitch(this));
         this.entityRenderMap.put(EntityBlaze.class, new RenderBlaze(this));
-        this.entityRenderMap.put(EntityPigZombie.class, new RenderPigZombie(this));
+        //this.entityRenderMap.put(EntityPigZombie.class, new RenderPigZombie(this));
         this.entityRenderMap.put(EntityZombie.class, new RenderZombie(this));
         this.entityRenderMap.put(EntityZombieVillager.class, new RenderZombieVillager(this));
         this.entityRenderMap.put(EntityHusk.class, new RenderHusk(this));

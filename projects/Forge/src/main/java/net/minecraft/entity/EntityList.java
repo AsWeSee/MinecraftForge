@@ -288,7 +288,7 @@ public class EntityList
         register(54, "zombie", EntityZombie.class, "Zombie");
         register(55, "slime", EntitySlime.class, "Slime");
         register(56, "ghast", EntityGhast.class, "Ghast");
-        register(57, "zombie_pigman", EntityPigZombie.class, "PigZombie");
+        //register(57, "zombie_pigman", EntityPigZombie.class, "PigZombie");
         register(58, "enderman", EntityEnderman.class, "Enderman");
         register(59, "cave_spider", EntityCaveSpider.class, "CaveSpider");
         register(60, "silverfish", EntitySilverfish.class, "Silverfish");

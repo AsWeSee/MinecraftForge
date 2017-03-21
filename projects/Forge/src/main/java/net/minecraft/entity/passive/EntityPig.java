@@ -227,18 +227,18 @@ public class EntityPig extends EntityAnimal
     {
         if (!this.world.isRemote && !this.isDead)
         {
-            EntityPigZombie entitypigzombie = new EntityPigZombie(this.world);
-            entitypigzombie.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(Items.GOLDEN_SWORD));
-            entitypigzombie.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
-            entitypigzombie.setNoAI(this.isAIDisabled());
-
-            if (this.hasCustomName())
-            {
-                entitypigzombie.setCustomNameTag(this.getCustomNameTag());
-                entitypigzombie.setAlwaysRenderNameTag(this.getAlwaysRenderNameTag());
-            }
-
-            this.world.spawnEntity(entitypigzombie);
+//            EntityPigZombie entitypigzombie = new EntityPigZombie(this.world);
+//            entitypigzombie.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(Items.GOLDEN_SWORD));
+//            entitypigzombie.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
+//            entitypigzombie.setNoAI(this.isAIDisabled());
+//
+//            if (this.hasCustomName())
+//            {
+//                entitypigzombie.setCustomNameTag(this.getCustomNameTag());
+//                entitypigzombie.setAlwaysRenderNameTag(this.getAlwaysRenderNameTag());
+//            }
+//
+//            this.world.spawnEntity(entitypigzombie);
             this.setDead();
         }
     }

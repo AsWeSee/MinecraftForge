@@ -53,8 +53,8 @@ public class EntityPigZombie extends EntityZombie
 
     protected void applyEntityAI()
     {
-        this.targetTasks.addTask(1, new EntityPigZombie.AIHurtByAggressor(this));
-        this.targetTasks.addTask(2, new EntityPigZombie.AITargetAggressor(this));
+        //this.targetTasks.addTask(1, new EntityPigZombie.AIHurtByAggressor(this));
+        //this.targetTasks.addTask(2, new EntityPigZombie.AITargetAggressor(this));
     }
 
     protected void applyEntityAttributes()

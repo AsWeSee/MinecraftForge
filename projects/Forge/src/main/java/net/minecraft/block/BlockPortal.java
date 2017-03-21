@@ -73,12 +73,12 @@ public class BlockPortal extends BlockBreakable
 
             if (i > 0 && !worldIn.getBlockState(blockpos.up()).isNormalCube())
             {
-                Entity entity = ItemMonsterPlacer.spawnCreature(worldIn, EntityList.getKey(EntityPigZombie.class), (double)blockpos.getX() + 0.5D, (double)blockpos.getY() + 1.1D, (double)blockpos.getZ() + 0.5D);
-
-                if (entity != null)
-                {
-                    entity.timeUntilPortal = entity.getPortalCooldown();
-                }
+//                Entity entity = ItemMonsterPlacer.spawnCreature(worldIn, EntityList.getKey(EntityPigZombie.class), (double)blockpos.getX() + 0.5D, (double)blockpos.getY() + 1.1D, (double)blockpos.getZ() + 0.5D);
+//
+//                if (entity != null)
+//                {
+//                    entity.timeUntilPortal = entity.getPortalCooldown();
+//                }
             }
         }
     }

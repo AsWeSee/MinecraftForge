@@ -206,7 +206,7 @@ public class DataFixesManager
         EntityMooshroom.registerFixesMooshroom(datafixer);
         EntityOcelot.registerFixesOcelot(datafixer);
         EntityPig.registerFixesPig(datafixer);
-        EntityPigZombie.registerFixesPigZombie(datafixer);
+        //EntityPigZombie.registerFixesPigZombie(datafixer);
         EntityRabbit.registerFixesRabbit(datafixer);
         EntitySheep.registerFixesSheep(datafixer);
         EntityShulker.registerFixesShulker(datafixer);

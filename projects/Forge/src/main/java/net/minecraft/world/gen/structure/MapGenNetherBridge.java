@@ -19,7 +19,7 @@ public class MapGenNetherBridge extends MapGenStructure
     public MapGenNetherBridge()
     {
         this.spawnList.add(new Biome.SpawnListEntry(EntityBlaze.class, 10, 2, 3));
-        this.spawnList.add(new Biome.SpawnListEntry(EntityPigZombie.class, 5, 4, 4));
+        //this.spawnList.add(new Biome.SpawnListEntry(EntityPigZombie.class, 5, 4, 4));
         this.spawnList.add(new Biome.SpawnListEntry(EntityWitherSkeleton.class, 8, 5, 5));
         this.spawnList.add(new Biome.SpawnListEntry(EntitySkeleton.class, 2, 5, 5));
         this.spawnList.add(new Biome.SpawnListEntry(EntityMagmaCube.class, 3, 4, 4));
