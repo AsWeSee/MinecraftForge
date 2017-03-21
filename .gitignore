@@ -16,8 +16,8 @@
 /.gradle
 
 #occupational hazards
-/projects/Clean/
-/projects/run/
+/projects/
+!/projects/Forge/
 /repo/
 /buildSrc
 
