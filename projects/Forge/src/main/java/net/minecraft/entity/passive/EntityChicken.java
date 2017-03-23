@@ -53,7 +53,7 @@ public class EntityChicken extends EntityAnimal
     {
         super(worldIn);
         this.setSize(0.4F, 0.7F);
-        this.timeUntilNextEgg = this.rand.nextInt(6000) + 6000;
+        this.timeUntilNextEgg = 60;//this.rand.nextInt(6000) + 6000;
         this.setPathPriority(PathNodeType.WATER, 0.0F);
     }
 
@@ -107,7 +107,7 @@ public class EntityChicken extends EntityAnimal
         {
             this.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
             this.dropItem(Items.EGG, 1);
-            this.timeUntilNextEgg = this.rand.nextInt(600) + 600;
+            this.timeUntilNextEgg = 60; //this.rand.nextInt(60) + 600;
         }
     }
 
