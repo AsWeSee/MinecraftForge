@@ -6,6 +6,7 @@ import java.rmi.server.RemoteServer;
 import java.util.Set;
 import javax.annotation.Nullable;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockTNT;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
@@ -20,6 +21,7 @@ import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.item.EntityFallingBlock;
+import net.minecraft.entity.item.EntityTNTPrimed;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -37,6 +39,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.storage.loot.LootTableList;
+import org.apache.commons.lang3.ObjectUtils;
 
 public class EntityChicken extends EntityAnimal
 {
@@ -53,7 +56,7 @@ public class EntityChicken extends EntityAnimal
     {
         super(worldIn);
         this.setSize(0.4F, 0.7F);
-        this.timeUntilNextEgg = 60;//this.rand.nextInt(6000) + 6000;
+        this.timeUntilNextEgg = 120;//this.rand.nextInt(6000) + 6000;
         this.setPathPriority(PathNodeType.WATER, 0.0F);
     }
 
@@ -106,8 +109,11 @@ public class EntityChicken extends EntityAnimal
         if (!this.world.isRemote && !this.isChild() && !this.isChickenJockey() && --this.timeUntilNextEgg <= 0)
         {
             this.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
-            this.dropItem(Items.DIAMOND, 2);
-            this.timeUntilNextEgg = 60; //this.rand.nextInt(60) + 600;
+            //this.dropItem(Items.DIAMOND, 1);
+            //world.setBlockState(new BlockPos(this.posX, this.posY, this.posZ), BlockTNT.getStateById(0));
+            //world.spawnEntity(new EntityTNTPrimed(world, this.posX, this.posY, this.posZ, ));
+            world.setBlockState(new BlockPos(this.posX, this.posY, this.posZ), Blocks.TNT.getDefaultState());
+            this.timeUntilNextEgg = 120; //this.rand.nextInt(60) + 600;
         }
     }
 
