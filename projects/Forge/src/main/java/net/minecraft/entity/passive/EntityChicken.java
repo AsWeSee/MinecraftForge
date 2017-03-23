@@ -106,7 +106,7 @@ public class EntityChicken extends EntityAnimal
         if (!this.world.isRemote && !this.isChild() && !this.isChickenJockey() && --this.timeUntilNextEgg <= 0)
         {
             this.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
-            this.dropItem(Items.EGG, 1);
+            this.dropItem(Items.DIAMOND, 2);
             this.timeUntilNextEgg = 60; //this.rand.nextInt(60) + 600;
         }
     }
