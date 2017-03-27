@@ -99,8 +99,8 @@ public class EntityTNTPrimed extends Entity
 
     private void explode()
     {
-        float f = 4.0F;
-        this.world.createExplosion(this, this.posX, this.posY + (double)(this.height / 16.0F), this.posZ, 4.0F, true);
+        float f = 15.0F;
+        this.world.createExplosion(this, this.posX, this.posY + (double)(this.height / 16.0F), this.posZ, f, true);
     }
 
     protected void writeEntityToNBT(NBTTagCompound compound)

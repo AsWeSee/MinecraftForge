@@ -100,12 +100,23 @@ public class EntityChicken extends EntityAnimal
 
         this.wingRotDelta = (float)((double)this.wingRotDelta * 0.9D);
 
-        if (!this.onGround && this.motionY < 0.0D)
-        {
-            this.motionY *= 0.6D;
-        }
+//        if (!this.onGround && this.motionY < 0.0D)
+//        {
+//            this.motionY = 0.2D;
+//        }
 
+        if(this.posY < 110){
+            this.motionY = 2.2D;
+        }
+        if(this.posY >= 110){
+            this.motionY = -0.2D;
+        }
+        int i=0;
+        i++;
+            this.motionX += (this.rand.nextDouble() - 0.5D)/4;
+            this.motionZ += (this.rand.nextDouble() - 0.5D)/4;
         this.wingRotation += this.wingRotDelta * 2.0F;
+
 
         if (!this.world.isRemote && !this.isChild() && !this.isChickenJockey() && --this.timeUntilNextEgg <= 0)
         {
