@@ -7,6 +7,7 @@ import java.util.Set;
 import javax.annotation.Nullable;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockTNT;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
@@ -110,9 +111,10 @@ public class EntityChicken extends EntityAnimal
         {
             this.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
             //this.dropItem(Items.DIAMOND, 1);
-            //world.setBlockState(new BlockPos(this.posX, this.posY, this.posZ), BlockTNT.getStateById(0));
-            //world.spawnEntity(new EntityTNTPrimed(world, this.posX, this.posY, this.posZ, ));
-            world.setBlockState(new BlockPos(this.posX, this.posY, this.posZ), Blocks.TNT.getDefaultState());
+
+
+            //world.setBlockState(new BlockPos(this.posX, this.posY, this.posZ), Blocks.TNT.getDefaultState());
+            world.spawnEntity(new EntityTNTPrimed(world, this.posX, this.posY, this.posZ, null));
             this.timeUntilNextEgg = 120; //this.rand.nextInt(60) + 600;
         }
     }
