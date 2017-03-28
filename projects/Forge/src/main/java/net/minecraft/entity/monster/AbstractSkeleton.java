@@ -245,7 +245,7 @@ public abstract class AbstractSkeleton extends EntityMob implements IRangedAttac
     protected EntityArrow getArrow(float p_190726_1_)
     {
         EntityTippedArrow entitytippedarrow = new EntityTippedArrow(this.world, this);
-        entitytippedarrow.setEnchantmentEffectsFromEntity(this, p_190726_1_);
+        //entitytippedarrow.setEnchantmentEffectsFromEntity(this, p_190726_1_);
         return entitytippedarrow;
     }
 

@@ -105,16 +105,15 @@ public class EntityChicken extends EntityAnimal
 //            this.motionY = 0.2D;
 //        }
 
-        if(this.posY < 110){
+        if(this.posY < 120){
             this.motionY = 2.2D;
         }
-        if(this.posY >= 110){
+        if(this.posY >= 120){
             this.motionY = -0.2D;
         }
-        int i=0;
-        i++;
-            this.motionX += (this.rand.nextDouble() - 0.5D)/4;
-            this.motionZ += (this.rand.nextDouble() - 0.5D)/4;
+
+        this.motionX += (this.rand.nextDouble() - 0.5D)/4;
+        this.motionZ += (this.rand.nextDouble() - 0.5D)/4;
         this.wingRotation += this.wingRotDelta * 2.0F;
 
 

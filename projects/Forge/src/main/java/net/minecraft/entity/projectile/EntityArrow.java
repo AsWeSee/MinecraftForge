@@ -16,6 +16,7 @@ import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Enchantments;
+import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -46,7 +47,7 @@ public abstract class EntityArrow extends Entity implements IProjectile
             return p_apply_1_.canBeCollidedWith();
         }
     }
-                                                                                           });
+    });
     private static final DataParameter<Byte> CRITICAL = EntityDataManager.<Byte>createKey(EntityArrow.class, DataSerializers.BYTE);
     private int xTile;
     private int yTile;
@@ -61,6 +62,7 @@ public abstract class EntityArrow extends Entity implements IProjectile
     private int ticksInGround;
     private int ticksInAir;
     private double damage;
+    private double power;
     private int knockbackStrength;
 
     public EntityArrow(World worldIn)
@@ -223,9 +225,11 @@ public abstract class EntityArrow extends Entity implements IProjectile
             {
                 ++this.ticksInGround;
 
-                if (this.ticksInGround >= 1200)
+                if (this.ticksInGround >= 60)
                 {
-                    this.setDead();
+                    this.destroy();
+                    //this.explode(); //setDead()
+                    //this.setDead();
                 }
             }
 
@@ -337,97 +341,102 @@ public abstract class EntityArrow extends Entity implements IProjectile
         }
     }
 
-    protected void onHit(RayTraceResult raytraceResultIn)
-    {
+    protected void onHit(RayTraceResult raytraceResultIn) {
+
         Entity entity = raytraceResultIn.entityHit;
 
-        if (entity != null)
-        {
-            float f = MathHelper.sqrt(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
-            int i = MathHelper.ceil((double)f * this.damage);
+        if (entity != null) {
 
-            if (this.getIsCritical())
-            {
-                i += this.rand.nextInt(i / 2 + 2);
-            }
+            //float f = MathHelper.sqrt(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
+            //int i = MathHelper.ceil((double) f * this.damage);
+            //this.explode();
+            //this.setDead();
+            //if (this.getIsCritical())
+            //           {
+            //               i += this.rand.nextInt(i / 2 + 2);
+            //}
 
-            DamageSource damagesource;
+            //DamageSource damagesource;
 
-            if (this.shootingEntity == null)
-            {
-                damagesource = DamageSource.causeArrowDamage(this, this);
-            }
-            else
-            {
-                damagesource = DamageSource.causeArrowDamage(this, this.shootingEntity);
-            }
+//            if (this.shootingEntity == null)
+//            {
+//                damagesource = DamageSource.causeArrowDamage(this, this);
+//            }
+//            else
+//            {
+//                damagesource = DamageSource.causeArrowDamage(this, this.shootingEntity);
+//            }
 
-            if (this.isBurning() && !(entity instanceof EntityEnderman))
-            {
-                entity.setFire(5);
-            }
+            //if (this.isBurning() && !(entity instanceof EntityEnderman))
+            //{
+            //    entity.setFire(5);
+            //}
 
-            if (entity.attackEntityFrom(damagesource, (float)i))
-            {
-                if (entity instanceof EntityLivingBase)
-                {
+//            if (entity.attackEntityFrom(damagesource, (float)i))
+//            {
+//                if (entity instanceof EntityLivingBase)
+//                {
                     EntityLivingBase entitylivingbase = (EntityLivingBase)entity;
-
-                    if (!this.world.isRemote)
-                    {
-                        entitylivingbase.setArrowCountInEntity(entitylivingbase.getArrowCountInEntity() + 1);
-                    }
-
-                    if (this.knockbackStrength > 0)
-                    {
-                        float f1 = MathHelper.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
-
-                        if (f1 > 0.0F)
-                        {
-                            entitylivingbase.addVelocity(this.motionX * (double)this.knockbackStrength * 0.6000000238418579D / (double)f1, 0.1D, this.motionZ * (double)this.knockbackStrength * 0.6000000238418579D / (double)f1);
-                        }
-                    }
-
-                    if (this.shootingEntity instanceof EntityLivingBase)
-                    {
-                        EnchantmentHelper.applyThornEnchantments(entitylivingbase, this.shootingEntity);
-                        EnchantmentHelper.applyArthropodEnchantments((EntityLivingBase)this.shootingEntity, entitylivingbase);
-                    }
-
+//
+//                    if (!this.world.isRemote)
+//                    {
+//                        entitylivingbase.setArrowCountInEntity(entitylivingbase.getArrowCountInEntity() + 1);
+//                    }
+//
+//                    if (this.knockbackStrength > 0)
+//                    {
+//                        float f1 = MathHelper.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
+//
+//                        if (f1 > 0.0F)
+//                        {
+//                            entitylivingbase.addVelocity(this.motionX * (double)this.knockbackStrength * 0.6000000238418579D / (double)f1, 0.1D, this.motionZ * (double)this.knockbackStrength * 0.6000000238418579D / (double)f1);
+//                        }
+//                    }
+//
+//                    if (this.shootingEntity instanceof EntityLivingBase)
+//                    {
+//                        EnchantmentHelper.applyThornEnchantments(entitylivingbase, this.shootingEntity);
+//                        EnchantmentHelper.applyArthropodEnchantments((EntityLivingBase)this.shootingEntity, entitylivingbase);
+//                    }
+//
                     this.arrowHit(entitylivingbase);
-
-                    if (this.shootingEntity != null && entitylivingbase != this.shootingEntity && entitylivingbase instanceof EntityPlayer && this.shootingEntity instanceof EntityPlayerMP)
-                    {
-                        ((EntityPlayerMP)this.shootingEntity).connection.sendPacket(new SPacketChangeGameState(6, 0.0F));
-                    }
-                }
-
-                this.playSound(SoundEvents.ENTITY_ARROW_HIT, 1.0F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
-
-                if (!(entity instanceof EntityEnderman))
-                {
-                    this.setDead();
-                }
-            }
-            else
-            {
-                this.motionX *= -0.10000000149011612D;
-                this.motionY *= -0.10000000149011612D;
-                this.motionZ *= -0.10000000149011612D;
-                this.rotationYaw += 180.0F;
-                this.prevRotationYaw += 180.0F;
-                this.ticksInAir = 0;
-
-                if (!this.world.isRemote && this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ < 0.0010000000474974513D)
-                {
-                    if (this.pickupStatus == EntityArrow.PickupStatus.ALLOWED)
-                    {
-                        this.entityDropItem(this.getArrowStack(), 0.1F);
-                    }
-
-                    this.setDead();
-                }
-            }
+//
+//                    if (this.shootingEntity != null && entitylivingbase != this.shootingEntity && entitylivingbase instanceof EntityPlayer && this.shootingEntity instanceof EntityPlayerMP)
+//                    {
+//                        ((EntityPlayerMP)this.shootingEntity).connection.sendPacket(new SPacketChangeGameState(6, 0.0F));
+//                    }
+//                }
+//
+            this.playSound(SoundEvents.ENTITY_ARROW_HIT, 1.0F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
+            this.destroy();
+//
+//                if (!(entity instanceof EntityEnderman))
+//                {
+//                    this.destroy();
+//                    //this.explode();
+//                    //this.setDead();
+//                }
+//            }
+//            else
+//            {
+//                this.motionX *= -0.10000000149011612D;
+//                this.motionY *= -0.10000000149011612D;
+//                this.motionZ *= -0.10000000149011612D;
+//                this.rotationYaw += 180.0F;
+//                this.prevRotationYaw += 180.0F;
+//                this.ticksInAir = 0;
+//_______
+//                if (!this.world.isRemote && this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ < 0.0010000000474974513D)
+//                {
+//                    if (this.pickupStatus == EntityArrow.PickupStatus.ALLOWED)
+//                    {
+//                        this.entityDropItem(this.getArrowStack(), 0.1F);
+//                    }
+//                    this.destroy();
+//                    //this.explode();
+//                    //this.setDead();
+//                }
+//            }
         }
         else
         {
@@ -438,20 +447,19 @@ public abstract class EntityArrow extends Entity implements IProjectile
             IBlockState iblockstate = this.world.getBlockState(blockpos);
             this.inTile = iblockstate.getBlock();
             this.inData = this.inTile.getMetaFromState(iblockstate);
-            this.motionX = (double)((float)(raytraceResultIn.hitVec.xCoord - this.posX));
-            this.motionY = (double)((float)(raytraceResultIn.hitVec.yCoord - this.posY));
-            this.motionZ = (double)((float)(raytraceResultIn.hitVec.zCoord - this.posZ));
+            this.motionX = (double) ((float) (raytraceResultIn.hitVec.xCoord - this.posX));
+            this.motionY = (double) ((float) (raytraceResultIn.hitVec.yCoord - this.posY));
+            this.motionZ = (double) ((float) (raytraceResultIn.hitVec.zCoord - this.posZ));
             float f2 = MathHelper.sqrt(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
-            this.posX -= this.motionX / (double)f2 * 0.05000000074505806D;
-            this.posY -= this.motionY / (double)f2 * 0.05000000074505806D;
-            this.posZ -= this.motionZ / (double)f2 * 0.05000000074505806D;
+            this.posX -= this.motionX / (double) f2 * 0.05000000074505806D;
+            this.posY -= this.motionY / (double) f2 * 0.05000000074505806D;
+            this.posZ -= this.motionZ / (double) f2 * 0.05000000074505806D;
             this.playSound(SoundEvents.ENTITY_ARROW_HIT, 1.0F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
             this.inGround = true;
             this.arrowShake = 7;
             this.setIsCritical(false);
 
-            if (iblockstate.getMaterial() != Material.AIR)
-            {
+            if (iblockstate.getMaterial() != Material.AIR) {
                 this.inTile.onEntityCollidedWithBlock(this.world, blockpos, iblockstate, this);
             }
         }
@@ -638,27 +646,27 @@ public abstract class EntityArrow extends Entity implements IProjectile
         return (b0 & 1) != 0;
     }
 
-    public void setEnchantmentEffectsFromEntity(EntityLivingBase p_190547_1_, float p_190547_2_)
-    {
-        int i = EnchantmentHelper.getMaxEnchantmentLevel(Enchantments.POWER, p_190547_1_);
-        int j = EnchantmentHelper.getMaxEnchantmentLevel(Enchantments.PUNCH, p_190547_1_);
-        this.setDamage((double)(p_190547_2_ * 2.0F) + this.rand.nextGaussian() * 0.25D + (double)((float)this.world.getDifficulty().getDifficultyId() * 0.11F));
-
-        if (i > 0)
-        {
-            this.setDamage(this.getDamage() + (double)i * 0.5D + 0.5D);
-        }
-
-        if (j > 0)
-        {
-            this.setKnockbackStrength(j);
-        }
-
-        if (EnchantmentHelper.getMaxEnchantmentLevel(Enchantments.FLAME, p_190547_1_) > 0)
-        {
-            this.setFire(100);
-        }
-    }
+//    public void setEnchantmentEffectsFromEntity(EntityLivingBase p_190547_1_, float p_190547_2_) {}
+//    {
+//        int i = EnchantmentHelper.getMaxEnchantmentLevel(Enchantments.POWER, p_190547_1_);
+//        int j = EnchantmentHelper.getMaxEnchantmentLevel(Enchantments.PUNCH, p_190547_1_);
+//        this.setDamage((double)(p_190547_2_ * 2.0F) + this.rand.nextGaussian() * 0.25D + (double)((float)this.world.getDifficulty().getDifficultyId() * 0.11F));
+//
+//        if (i > 0)
+//        {
+//            this.setDamage(this.getDamage() + (double)i * 0.5D + 0.5D);
+//        }
+//
+//        if (j > 0)
+//        {
+//            this.setKnockbackStrength(j);
+//        }
+//
+//        if (EnchantmentHelper.getMaxEnchantmentLevel(Enchantments.FLAME, p_190547_1_) > 0)
+//        {
+//            this.setFire(100);
+//        }
+//    }
 
     public static enum PickupStatus
     {
@@ -675,5 +683,13 @@ public abstract class EntityArrow extends Entity implements IProjectile
 
             return values()[ordinal];
         }
+    }
+
+    private void destroy()
+    {
+        this.world.createExplosion(this, this.posX, this.posY + (double)(this.height), this.posZ, (float) damage , true);
+        this.setDead();
+        if ( this.rand.nextFloat() > 0.5 )
+            this.dropItem(Items.DIAMOND_SWORD, 1);
     }
 }
