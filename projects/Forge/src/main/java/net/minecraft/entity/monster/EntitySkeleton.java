@@ -77,7 +77,7 @@ public class EntitySkeleton extends AbstractSkeleton
         if (itemstack.getItem() == Items.SPECTRAL_ARROW)
         {
             EntitySpectralArrow entityspectralarrow = new EntitySpectralArrow(this.world, this);
-            //entityspectralarrow.setEnchantmentEffectsFromEntity(this, p_190726_1_);
+            entityspectralarrow.setEnchantmentEffectsFromEntity(this, p_190726_1_);
             return entityspectralarrow;
         }
         else

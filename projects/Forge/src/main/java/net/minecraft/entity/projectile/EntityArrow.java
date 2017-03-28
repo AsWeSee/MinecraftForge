@@ -646,27 +646,27 @@ public abstract class EntityArrow extends Entity implements IProjectile
         return (b0 & 1) != 0;
     }
 
-//    public void setEnchantmentEffectsFromEntity(EntityLivingBase p_190547_1_, float p_190547_2_) {}
-//    {
-//        int i = EnchantmentHelper.getMaxEnchantmentLevel(Enchantments.POWER, p_190547_1_);
-//        int j = EnchantmentHelper.getMaxEnchantmentLevel(Enchantments.PUNCH, p_190547_1_);
-//        this.setDamage((double)(p_190547_2_ * 2.0F) + this.rand.nextGaussian() * 0.25D + (double)((float)this.world.getDifficulty().getDifficultyId() * 0.11F));
-//
-//        if (i > 0)
-//        {
-//            this.setDamage(this.getDamage() + (double)i * 0.5D + 0.5D);
-//        }
-//
-//        if (j > 0)
-//        {
-//            this.setKnockbackStrength(j);
-//        }
-//
-//        if (EnchantmentHelper.getMaxEnchantmentLevel(Enchantments.FLAME, p_190547_1_) > 0)
-//        {
-//            this.setFire(100);
-//        }
-//    }
+    public void setEnchantmentEffectsFromEntity(EntityLivingBase p_190547_1_, float p_190547_2_)
+    {
+        int i = EnchantmentHelper.getMaxEnchantmentLevel(Enchantments.POWER, p_190547_1_);
+        int j = EnchantmentHelper.getMaxEnchantmentLevel(Enchantments.PUNCH, p_190547_1_);
+        this.setDamage((double)(p_190547_2_ * 2.0F) + this.rand.nextGaussian() * 0.25D + (double)((float)this.world.getDifficulty().getDifficultyId() * 0.11F));
+
+        if (i > 0)
+        {
+            this.setDamage(this.getDamage() + (double)i * 0.5D + 0.5D);
+        }
+
+        if (j > 0)
+        {
+            this.setKnockbackStrength(j);
+        }
+
+        if (EnchantmentHelper.getMaxEnchantmentLevel(Enchantments.FLAME, p_190547_1_) > 0)
+        {
+            this.setFire(100);
+        }
+    }
 
     public static enum PickupStatus
     {
