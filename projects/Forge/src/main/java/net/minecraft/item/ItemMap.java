@@ -16,6 +16,10 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.Packet;
+import net.minecraft.stats.StatList;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -32,8 +36,7 @@ public class ItemMap extends ItemMapBase
         this.setHasSubtypes(true);
     }
 
-    public static ItemStack setupNewMap(World p_190906_0_, double p_190906_1_, double p_190906_3_, byte p_190906_5_, boolean p_190906_6_, boolean p_190906_7_)
-    {
+    public static ItemStack setupNewMap(World p_190906_0_, double p_190906_1_, double p_190906_3_, byte p_190906_5_, boolean p_190906_6_, boolean p_190906_7_) {
         ItemStack itemstack = new ItemStack(Items.FILLED_MAP, 1, p_190906_0_.getUniqueDataId("map"));
         String s = "map_" + itemstack.getMetadata();
         MapData mapdata = new MapData(s);
@@ -45,6 +48,43 @@ public class ItemMap extends ItemMapBase
         mapdata.unlimitedTracking = p_190906_7_;
         mapdata.markDirty();
         return itemstack;
+    }
+
+    public static ItemStack setupNewMiniMap(World p_190906_0_, double p_190906_1_, double p_190906_3_, byte p_190906_5_, boolean p_190906_6_, boolean p_190906_7_)
+    {
+        ItemStack itemstack = new ItemStack(Items.FILLED_MAP, 1, p_190906_0_.getUniqueDataId("map"));
+        String s = "map_" + itemstack.getMetadata();
+        MapData mapdata = new MapData(s);
+        p_190906_0_.setData(s, mapdata);
+        mapdata.scale = p_190906_5_;
+        mapdata.calculateMiniMapCenter(p_190906_1_, p_190906_3_, mapdata.scale);
+        mapdata.dimension = p_190906_0_.provider.getDimension();
+        mapdata.trackingPosition = p_190906_6_;
+        mapdata.unlimitedTracking = p_190906_7_;
+        mapdata.markDirty();
+        return itemstack;
+    }
+
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
+    {
+        ItemStack itemstack = ItemMap.setupNewMiniMap(worldIn, playerIn.posX, playerIn.posZ, (byte)0, true, false);
+        ItemStack itemstack1 = playerIn.getHeldItem(handIn);
+        itemstack1.shrink(1);
+
+        if (itemstack1.isEmpty())
+        {
+            return new ActionResult(EnumActionResult.SUCCESS, itemstack);
+        }
+        else
+        {
+            if (!playerIn.inventory.addItemStackToInventory(itemstack.copy()))
+            {
+                playerIn.dropItem(itemstack, false);
+            }
+
+            playerIn.addStat(StatList.getObjectUseStats(this));
+            return new ActionResult(EnumActionResult.SUCCESS, itemstack1);
+        }
     }
 
     @Nullable
@@ -413,7 +453,7 @@ public class ItemMap extends ItemMapBase
             }
             else if (nbttagcompound.getBoolean("map_tracking_position"))
             {
-                enableMapTracking(stack, worldIn);
+                enableMapTracking(stack, worldIn, playerIn);
                 nbttagcompound.removeTag("map_tracking_position");
             }
         }
@@ -436,17 +476,20 @@ public class ItemMap extends ItemMapBase
         }
     }
 
-    protected static void enableMapTracking(ItemStack p_185064_0_, World p_185064_1_)
+    protected static void enableMapTracking(ItemStack p_185064_0_, World p_185064_1_, EntityPlayer playerIn)
     {
         MapData mapdata = Items.FILLED_MAP.getMapData(p_185064_0_, p_185064_1_);
         p_185064_0_.setItemDamage(p_185064_1_.getUniqueDataId("map"));
         MapData mapdata1 = new MapData("map_" + p_185064_0_.getMetadata());
         mapdata1.trackingPosition = true;
+        double p_x = playerIn.posX;
+        double p_z = playerIn.posZ;
 
         if (mapdata != null)
         {
-            mapdata1.xCenter = mapdata.xCenter;
-            mapdata1.zCenter = mapdata.zCenter;
+
+            mapdata1.xCenter = mapdata.xCenter; // x-center
+            mapdata1.zCenter = mapdata.zCenter; //y-center
             mapdata1.scale = mapdata.scale;
             mapdata1.dimension = mapdata.dimension;
             mapdata1.markDirty();

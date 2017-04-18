@@ -44,6 +44,12 @@ public class MapData extends WorldSavedData
         this.zCenter = k * i + i / 2 - 64;
     }
 
+    public void calculateMiniMapCenter(double x, double z, int mapScale)
+    {
+        this.xCenter = (int) x;
+        this.zCenter = (int) z;
+    }
+
     public void readFromNBT(NBTTagCompound nbt)
     {
         net.minecraft.nbt.NBTBase dimension = nbt.getTag("dimension");
