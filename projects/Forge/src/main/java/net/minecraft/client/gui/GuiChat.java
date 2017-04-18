@@ -64,6 +64,7 @@ public class GuiChat extends GuiScreen implements ITabCompleter
     {
         this.tabCompleter.resetRequested();
 
+        Gui.drawRect(1,1,100,100,Integer.MIN_VALUE);
         if (keyCode == 15)
         {
             this.tabCompleter.complete();

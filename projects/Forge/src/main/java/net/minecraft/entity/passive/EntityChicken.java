@@ -52,10 +52,12 @@ public class EntityChicken extends EntityAnimal
     public float wingRotDelta = 1.0F;
     public int timeUntilNextEgg;
     public boolean chickenJockey;
+    //public final double startY;
 
     public EntityChicken(World worldIn)
     {
         super(worldIn);
+        //startY = this.posY;
         this.setSize(0.4F, 0.7F);
         this.timeUntilNextEgg = 120;//this.rand.nextInt(6000) + 6000;
         this.setPathPriority(PathNodeType.WATER, 0.0F);
@@ -100,20 +102,20 @@ public class EntityChicken extends EntityAnimal
 
         this.wingRotDelta = (float)((double)this.wingRotDelta * 0.9D);
 
-//        if (!this.onGround && this.motionY < 0.0D)
-//        {
-//            this.motionY = 0.2D;
-//        }
+        if (!this.onGround && this.motionY < 0.0D)
+        {
+            this.motionY = 0.2D;
+        }
 
-        if(this.posY < 120){
+        if(this.posY < 5){
             this.motionY = 2.2D;
         }
-        if(this.posY >= 120){
+        if(this.posY >= 85){
             this.motionY = -0.2D;
         }
 
-        this.motionX += (this.rand.nextDouble() - 0.5D)/4;
-        this.motionZ += (this.rand.nextDouble() - 0.5D)/4;
+        this.motionX += (this.rand.nextDouble() - 0.5D)/8;
+        this.motionZ += (this.rand.nextDouble() - 0.5D)/8;
         this.wingRotation += this.wingRotDelta * 2.0F;
 
 
@@ -121,7 +123,6 @@ public class EntityChicken extends EntityAnimal
         {
             this.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
             //this.dropItem(Items.DIAMOND, 1);
-
 
             //world.setBlockState(new BlockPos(this.posX, this.posY, this.posZ), Blocks.TNT.getDefaultState());
             world.spawnEntity(new EntityTNTPrimed(world, this.posX, this.posY, this.posZ, null));

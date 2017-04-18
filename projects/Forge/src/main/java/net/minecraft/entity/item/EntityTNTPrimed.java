@@ -99,7 +99,7 @@ public class EntityTNTPrimed extends Entity
 
     private void explode()
     {
-        float f = 15.0F;
+        float f = 2.0F;
         this.world.createExplosion(this, this.posX, this.posY + (double)(this.height / 16.0F), this.posZ, f, true);
     }
 

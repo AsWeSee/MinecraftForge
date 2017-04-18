@@ -49,6 +49,7 @@ import net.minecraft.entity.monster.EntityPolarBear;
 import net.minecraft.entity.monster.EntityShulker;
 import net.minecraft.entity.monster.EntitySilverfish;
 import net.minecraft.entity.monster.EntitySkeleton;
+import net.minecraft.entity.monster.EntityTurret;
 import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.monster.EntitySnowman;
 import net.minecraft.entity.monster.EntitySpider;
@@ -241,7 +242,8 @@ public class EntityList
         register(2, "xp_orb", EntityXPOrb.class, "XPOrb");
         register(3, "area_effect_cloud", EntityAreaEffectCloud.class, "AreaEffectCloud");
         register(4, "elder_guardian", EntityElderGuardian.class, "ElderGuardian");
-        register(5, "wither_skeleton", EntityWitherSkeleton.class, "WitherSkeleton");
+        register(57, "wither_skeleton", EntityWitherSkeleton.class, "WitherSkeleton");
+        register(5, "turret", EntityTurret.class, "Turret"); //NEW
         register(6, "stray", EntityStray.class, "Stray");
         register(7, "egg", EntityEgg.class, "ThrownEgg");
         register(8, "leash_knot", EntityLeashKnot.class, "LeashKnot");

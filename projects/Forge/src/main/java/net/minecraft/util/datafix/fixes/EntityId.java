@@ -97,6 +97,7 @@ public class EntityId implements IFixableData
         OLD_TO_NEW_ID_MAP.put("Witch", "minecraft:witch");
         OLD_TO_NEW_ID_MAP.put("WitherBoss", "minecraft:wither");
         OLD_TO_NEW_ID_MAP.put("WitherSkeleton", "minecraft:wither_skeleton");
+        OLD_TO_NEW_ID_MAP.put("Turret", "minecraft:turret");
         OLD_TO_NEW_ID_MAP.put("WitherSkull", "minecraft:wither_skull");
         OLD_TO_NEW_ID_MAP.put("Wolf", "minecraft:wolf");
         OLD_TO_NEW_ID_MAP.put("XPOrb", "minecraft:xp_orb");

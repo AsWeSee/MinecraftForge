@@ -1244,6 +1244,7 @@ entity.Monster.name=Monster
 entity.Creeper.name=Creeper
 entity.Skeleton.name=Skeleton
 entity.WitherSkeleton.name=Wither Skeleton
+entity.Turret.name=Turret
 entity.Stray.name=Stray
 entity.Spider.name=Spider
 entity.Giant.name=Giant
